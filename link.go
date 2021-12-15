@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"log"
 	"fmt"
 	"bytes"
@@ -20,12 +19,12 @@ func SendLink (data CommentInfo) error {
 		data.Email,
 	}
 
-	host := os.Getenv("APP_SMTP_HOST")
-	port := os.Getenv("APP_SMTP_PORT")
+	host := "smtp.gmail.com"
+	port := "587"
 
 	auth := smtp.PlainAuth("",Sender, Password, host)
 
-	t, err := template.ParseFiles("./main.html")
+	t, err := template.ParseFiles("main.html")
 
 	if err != nil {
 		log.Fatal(err)
@@ -34,6 +33,7 @@ func SendLink (data CommentInfo) error {
 	var body bytes.Buffer
 	mimeHeaders := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	body.Write([]byte(fmt.Sprintf("Subject: This is a test \n%s\n\n", mimeHeaders)))
+
 	t.Execute(&body, data)
 	
 	err = smtp.SendMail(host + ":" + port, auth, Sender, receivers, body.Bytes())	
