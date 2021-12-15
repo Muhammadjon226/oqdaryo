@@ -10,7 +10,7 @@ import(
 
 func Home(w http.ResponseWriter, r *http.Request){
 
-	t:= template.Must(template.ParseFiles("../ui/pages/home.html"))
+	t:= template.Must(template.ParseFiles("ui/pages/home.html"))
 	t.Execute(w,nil)
 }
 func About(w http.ResponseWriter, r *http.Request){
