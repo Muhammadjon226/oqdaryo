@@ -1,5 +1,6 @@
 
 sendBtn.onclick = async function () {
+	site = window.location.href
 	
 	if (sender_name.value != '' && sender_email.value!='' && sender_comment.value!=''){
 		
@@ -10,7 +11,7 @@ sendBtn.onclick = async function () {
 	            comments: sender_comment.value
 	    })
 
-	    let response = await fetch('http://localhost:8080', {
+	    let response = await fetch(site, {
 	        method: 'POST',
 	        body: commentInfo,
 	        
