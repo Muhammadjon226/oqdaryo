@@ -11,7 +11,7 @@ func main(){
 	godotenv.Load()
 
 	
-	port := "8080"
+	port := "80"
     s := http.StripPrefix("/ui/", http.FileServer(http.Dir("./ui/")))
 	r := mux.NewRouter()
     r.PathPrefix("/ui/").Handler(s)
