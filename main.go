@@ -1,7 +1,6 @@
 package main
 
 import(
-	"os"
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -11,8 +10,8 @@ func main(){
 	
 	godotenv.Load()
 
-	port := os.Getenv("PORT")
-	// port = "8080"
+	
+	port := "8080"
     s := http.StripPrefix("/ui/", http.FileServer(http.Dir("./ui/")))
 	r := mux.NewRouter()
     r.PathPrefix("/ui/").Handler(s)
