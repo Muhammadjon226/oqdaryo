@@ -1,6 +1,6 @@
 
 sendBtn.onclick = async function () {
-	site = window.location.href
+	site = window.location.href+"/send"
 	
 	if (sender_name.value != '' && sender_email.value!='' && sender_comment.value!=''){
 		

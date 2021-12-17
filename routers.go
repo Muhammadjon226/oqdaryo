@@ -35,7 +35,7 @@ func Send(w http.ResponseWriter, r *http.Request){
 	var bodyData CommentInfo
 
 
-	if r.Method == "POST" {
+	if r.Method+"/send" == "POST" {
 
 		body, err := ioutil.ReadAll(r.Body)
 
