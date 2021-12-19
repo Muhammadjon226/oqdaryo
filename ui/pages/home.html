@@ -259,16 +259,16 @@
         <p class="intro">
           Fikr va mulohazalaringizni qoldiring!
         </p>
-        <form class="form">
+        <form class="form" method="post">
           <label for="name" id="label-name">
-            <input type="text" name="name" id="sender_name" placeholder="Ismingizni kiriting" required>
+            <input type="text" name="sender_name" id="sender_name" placeholder="Ismingizni kiriting" required>
           </label>
           <label for="email" id="label-email">
-            <input type="email" name="email" id="sender_email" placeholder="Emailingizni kiriting" required>
+            <input type="email" name="sender_email" id="sender_email" placeholder="Emailingizni kiriting" required>
           </label>
           <textarea
-            name="comment"
-            id="sender_comment"
+            name="sender_comments"
+            id="sender_comments"
             cols="30"
             rows="10"
             placeholder="E'tiroz va takliflaringizni kiriting!"

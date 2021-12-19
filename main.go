@@ -21,7 +21,7 @@ func main(){
 	r.HandleFunc("/techno", Techno).Methods("GET")
 	r.HandleFunc("/projects", Projects).Methods("GET")
 
-	r.HandleFunc("/send", Send).Methods("POST")
+	r.HandleFunc("/", Send).Methods("POST")
 
 	log.Println("Server ready at :",port)
 

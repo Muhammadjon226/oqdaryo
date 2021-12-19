@@ -1,11 +1,13 @@
 package main
 
-import(
+import (
 	"fmt"
 	"net/http"
+
 	"encoding/json"
 	"io/ioutil"
 	"html/template"
+
 )
 
 func Home(w http.ResponseWriter, r *http.Request){
@@ -31,12 +33,11 @@ func Techno(w http.ResponseWriter, r *http.Request){
 func Send(w http.ResponseWriter, r *http.Request){
 
 	w.Header().Set("Access-Control-Allow-Origin","*")
-	
-	var bodyData CommentInfo
+	var redirectTarget string
 
+	if r.Method == "POST" {
 
-	if r.Method+"/send" == "POST" {
-
+		var bodyData CommentInfo
 		body, err := ioutil.ReadAll(r.Body)
 
 		if err != nil {
@@ -46,6 +47,9 @@ func Send(w http.ResponseWriter, r *http.Request){
 		}
 		
 		json.Unmarshal(body, &bodyData)
+
+		fmt.Println(bodyData)
+		
 		err = SendLink(bodyData)
 
 		if err != nil {
@@ -53,7 +57,8 @@ func Send(w http.ResponseWriter, r *http.Request){
 		} else {
 			w.WriteHeader(http.StatusCreated)
 		}
-		fmt.Println(bodyData)
+		redirectTarget = "/about"
 	}
+	http.Redirect(w, r, redirectTarget, 302)
 	
 }

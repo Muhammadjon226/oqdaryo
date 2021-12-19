@@ -58,7 +58,7 @@ const addComment = (a) => {
     id: Date.now(),
     name: document.getElementById("sender_name").value,
     email: document.getElementById("sender_email").value,
-    comment: document.getElementById("sender_comment").value
+    comment: document.getElementById("sender_comments").value
   };
   comments.push(comment); // comment obyektini comments massiviga joylash
   document.forms[0].reset();
