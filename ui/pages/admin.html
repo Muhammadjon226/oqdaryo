@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qurilish</title>
+    <!-- Main css -->
+    <link rel="stylesheet" href="ui/main.css">
+    <!-- Normalize css -->
+    <link rel="stylesheet" href="ui/normalize.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="ui/fonts/fonts.css">
+  </head>
+  <body>
+    <div class="container">
+          <!-- Header section -->
+    <header class="header">
+      <div class="header-top flex">
+        <div class="logo flex">
+          <a href="/">
+            <img width="70px" height="70px" src="ui/images/logo.jpg" alt="company logos">
+          </a>
+          <h1 class="logo-name">Oqdaryo Quruvchi Savdo "MCHJ"</h1>
+        </div>
+
+        <div class="info">
+          <span>Тел: +998(93) 345-20-18</span>
+          <span>Samarqand viloyati, Oqdaryo tumani</span>
+        </div>
+      </div>
+      <div class="main-header">
+        <main class="hamburger-menu">
+          <div id="overlay">
+            <a class="active-page" href="/">BOSH SAHIFA</a>
+            <a href="/about">BIZ HAQIMIZDA</a>
+            <a href="/techno">TEXNIKALAR</a>
+            <a href="/projects">LOYIHALAR</a>
+          </div>
+          <div class="nav">
+            <div id="hamburger">
+              <div></div>
+            </div>
+          </div>
+        </main>
+        <ul class="navs flex">
+          <li class="nav">
+            <a class="active-page" href="/">BOSH SAHIFA</a>
+          </li>
+          <li class="nav"><a href="/about">BIZ HAQIMIZDA</a></li>
+          <li class="nav"><a href="/techno">TEXNIKALAR</a></li>
+          <li class="nav"><a href="/projects">LOYIHALAR</a></li>
+        </ul>
+      </div>
+    </header>
+    <!-- /Header section -->
+    </div>
+	<div>
+		<h1>Comments</h1>
+		<section>
+			<ul id="ordersElement"></ul>
+      <p>{{.}}</p>
+		</section>
+
+	</div>
+    
+    <!-- Footer section -->
+    <footer class="footer flex" id="footer">
+      <div class="connect">
+        <span>Тел: +998(93) 345-20-18</span>
+        <span>Email: boltayev.baxtiyor@bk.ru</span>
+        <span>Samarqand viloyati, Oqdaryo tumani</span>
+        <button class="btn">Aloqaga chiqish</button>
+      </div>
+      <div class="about">
+        <h2 class="main">Biz haqimizda</h2>
+        <ul class="about-lits">
+          <li class="about-list">
+            <a href="/techno">Texnikalar</a>
+          </li>
+          <li class="about-list">
+            <a href="/projects">Loyihalar</a>
+          </li>
+          <li class="about-list">
+            <a href="/about">Faoliyatimiz</a>
+          </li>
+        </ul>
+      </div>
+      <div class="others">
+        <p class="info">
+          <b>2010-2021  "Oqdaryo Quruvchi Savdo" MChJ</b> <br>
+          Joylashgan joyi: Samarqand viloyati, Oqdaryo tumani, Yangiqo'rg'on MFY, Mahalla qishlog'i 23-uy
+        </p>
+      </div>
+    </footer>
+    <!-- /Footer section -->
+
+    </div>
+
+    <!-- Main JS -->
+    </body>
+	<script src="ui/js/admin.js"></script>
+</html>

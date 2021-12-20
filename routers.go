@@ -5,60 +5,104 @@ import (
 	"net/http"
 
 	"encoding/json"
-	"io/ioutil"
 	"html/template"
-
+	// "io/ioutil"
 )
 
-func Home(w http.ResponseWriter, r *http.Request){
+func Home(w http.ResponseWriter, r *http.Request) {
 
-	t:= template.Must(template.ParseFiles("ui/pages/home.html"))
-	t.Execute(w,nil)
-}
-func About(w http.ResponseWriter, r *http.Request){
-
-	t:= template.Must(template.ParseFiles("ui/pages/about.html"))
-	t.Execute(w,nil)
-}
-func Projects(w http.ResponseWriter, r *http.Request){
-
-	t:= template.Must(template.ParseFiles("ui/pages/loyihalar.html"))
-	t.Execute(w,nil)
-}
-func Techno(w http.ResponseWriter, r *http.Request){
-
-	t:= template.Must(template.ParseFiles("ui/pages/techno.html"))
-	t.Execute(w,nil)
-}
-func Send(w http.ResponseWriter, r *http.Request){
-
-	w.Header().Set("Access-Control-Allow-Origin","*")
-	var redirectTarget string
-
-	if r.Method == "POST" {
-
-		var bodyData CommentInfo
-		body, err := ioutil.ReadAll(r.Body)
-
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-		} else {
-			w.WriteHeader(http.StatusCreated)
+	if r.Method == "GET" {
+		t := template.Must(template.ParseFiles("ui/pages/home.html"))
+		t.Execute(w, nil)
+	} else if r.Method == "POST" {
+		var bodyData CommentInfo = CommentInfo{
+			Name: r.FormValue("sender_name"),
+			Email:  r.FormValue("sender_email"),
+			Comment: r.FormValue("sender_comments"),
 		}
-		
-		json.Unmarshal(body, &bodyData)
-
 		fmt.Println(bodyData)
-		
-		err = SendLink(bodyData)
+
+		err := PostInfo(bodyData)
 
 		if err != nil {
+			fmt.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 		} else {
-			w.WriteHeader(http.StatusCreated)
+			http.Redirect(w, r, "/", 302)
 		}
-		redirectTarget = "/about"
 	}
-	http.Redirect(w, r, redirectTarget, 302)
 	
+}
+func About(w http.ResponseWriter, r *http.Request) {
+
+	t := template.Must(template.ParseFiles("ui/pages/about.html"))
+	t.Execute(w, nil)
+}
+func Projects(w http.ResponseWriter, r *http.Request) {
+
+	t := template.Must(template.ParseFiles("ui/pages/loyihalar.html"))
+	t.Execute(w, nil)
+}
+func Techno(w http.ResponseWriter, r *http.Request) {
+
+	t := template.Must(template.ParseFiles("ui/pages/techno.html"))
+	t.Execute(w, nil)
+}
+// func Post(w http.ResponseWriter, r *http.Request) {
+
+// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+// 	t := template.Must(template.ParseFiles("ui/pages/home.html"))
+// 	t.Execute(w, nil)
+
+// 	if r.Method == "POST" {
+
+// 		var bodyData CommentInfo
+// 		body, err := ioutil.ReadAll(r.Body)
+
+// 		if err != nil {
+// 			w.WriteHeader(http.StatusInternalServerError)
+// 		} else {
+// 			w.WriteHeader(http.StatusCreated)
+// 		}
+
+// 		json.Unmarshal(body, &bodyData)
+
+// 		fmt.Println(bodyData)
+
+// 		err = PostInfo(bodyData)
+
+// 		if err != nil {
+// 			fmt.Println(err)
+// 			w.WriteHeader(http.StatusInternalServerError)
+// 		} else {
+// 			w.WriteHeader(http.StatusCreated)
+// 		}
+// 	}
+// }
+func GetAll(w http.ResponseWriter, r *http.Request) {
+
+	datas, err := GetAllInfo()
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		panic(err)
+	}
+	if r.Method == "GET" {
+		t := template.Must(template.ParseFiles("ui/pages/admin.html"))
+		t.Execute(w, datas)
+	
+	} else if r.Method == "VIEW" {
+
+		e := json.NewEncoder(w)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		e.Encode(datas)
+
+	}
+
+	
+
+	
+
 }

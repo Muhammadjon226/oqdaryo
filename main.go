@@ -16,12 +16,12 @@ func main(){
     s := http.StripPrefix("/ui/", http.FileServer(http.Dir("./ui/")))
 	r := mux.NewRouter()
     r.PathPrefix("/ui/").Handler(s)
-	r.HandleFunc("/", Home).Methods("GET")
+	r.HandleFunc("/", Home).Methods("GET", "POST")
 	r.HandleFunc("/about", About).Methods("GET")
 	r.HandleFunc("/techno", Techno).Methods("GET")
 	r.HandleFunc("/projects", Projects).Methods("GET")
 
-	r.HandleFunc("/", Send).Methods("POST")
+	r.HandleFunc("/admin", GetAll).Methods("GET")
 
 	log.Println("Server ready at :",port)
 
