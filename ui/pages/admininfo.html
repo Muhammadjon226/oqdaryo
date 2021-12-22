@@ -19,7 +19,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../../ui/admin.css" rel="stylesheet">
+    <link href="ui/admin.css" rel="stylesheet">
+    <link href="ui/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,28 +31,49 @@
             <a href="/" class="navbar-brand ml-lg-3">
                 <h1 class="m-0 display-5 text-primary">OQDARYO SERVIS</h1>
             </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
         </nav>
     </div>
     <!-- Navbar End -->
 
 
-            
-    <div id="app">
 
-        <h1 id="title_h1"></h1>
-    </div>
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    <div class="col-sm-12 mt-2">
+        <div class="card">
+          <div class="card-header h4 text-center">
+            Information    
+          </div>
+          <div class="card-body">
+            <div class="row p-3">
+                <div class="col-lg-6 col-md-6">
+                    <h3>Name</h3><p id="sfname"></p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <h3>Email</h3>
+                    <p id="sfemail"></p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="mt-2">
+        <div class="card">
+          <div class="card-header h4 text-center">
+            <h3>Comment</h3> 
+          </div>
+          <div class="card-body">
+            <div class="row p-3">
+                <div class="col-12 th">
+                    <p id="comment">No comment</p>
+                </div>
+            </div>
+          </div>
+        </div>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <!-- Template Javascript -->
-    <script src="../../ui/js/admin.js"></script>
+<!-- Template Javascript -->
+    <script src="../../ui/js/admininfo.js"></script>
 </body>
 
 </html>

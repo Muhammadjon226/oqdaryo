@@ -21,7 +21,9 @@ func main(){
 	r.HandleFunc("/techno", Techno).Methods("GET")
 	r.HandleFunc("/projects", Projects).Methods("GET")
 
-	r.HandleFunc("/admin", GetAll).Methods("GET")
+	r.HandleFunc("/admin", Loggin).Methods("GET", "POST")
+	r.HandleFunc("/admin/comments", GetAll).Methods("GET", "VIEW")
+	r.HandleFunc("/admin/comments/{commentId}", GetById).Methods("GET", "VIEW")
 
 	log.Println("Server ready at :",port)
 

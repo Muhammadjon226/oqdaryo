@@ -18,7 +18,7 @@ func PostInfo(data CommentInfo) error {
 	defer db.Close()
 	fmt.Println(data)
 	if (data.Name == "" && data.Email == "" && data.Comment == "") {
-		err = errors.New("Null string")
+		err = errors.New("null string")
 		return err
 	}
 	_, err = db.Query(POSTINFO,

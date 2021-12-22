@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login</title>
+	<style type="text/css">
+		
+		
+		body{
+			color: white;
+
+		}
+		form{
+
+			margin-top: 15%;
+		}
+		@media (min-width: 960px) {
+			div>div{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+		input{
+			margin-left: 1rem;
+			font-size: 2rem;
+		}
+		button{
+			padding: 0.5rem;
+			color: black;
+			margin-top: 2rem;
+			font-size: 2rem;
+			background-color: rgba(40, 200, 100, 1);
+		}
+		button:hover{
+			background-color: green;
+			color: white;
+			cursor: pointer;
+		}
+		a{
+			color: white;
+		}
+		h1{
+			font-size: 2.1rem;
+			font-weight: 800 !important;
+			color: #FF4800 !important;
+			margin-left: 3rem;
+		}
+	</style>
+</head>
+<body>
+	<!-- Navbar Start -->
+	<nav>
+		<a href="/">
+			<h1>Oqdaryo Servis</h1>
+		</a>
+	</nav>
+
+	<form method="post" action="/admin">
+		<div>
+			<div>
+				
+				<input type="text" id="name" name="name" placeholder="Username">
+				<input type="password" id="password" name="password" placeholder="Password">
+			</div>
+			<div>
+				<button type="submit">Login</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

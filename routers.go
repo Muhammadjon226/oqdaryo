@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"encoding/json"
 	"html/template"
+
+	"github.com/gorilla/mux"
 	// "io/ioutil"
 )
 
@@ -16,8 +19,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, nil)
 	} else if r.Method == "POST" {
 		var bodyData CommentInfo = CommentInfo{
-			Name: r.FormValue("sender_name"),
-			Email:  r.FormValue("sender_email"),
+			Name:    r.FormValue("sender_name"),
+			Email:   r.FormValue("sender_email"),
 			Comment: r.FormValue("sender_comments"),
 		}
 		fmt.Println(bodyData)
@@ -31,7 +34,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, "/", 302)
 		}
 	}
-	
+
 }
 func About(w http.ResponseWriter, r *http.Request) {
 
@@ -48,38 +51,29 @@ func Techno(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("ui/pages/techno.html"))
 	t.Execute(w, nil)
 }
-// func Post(w http.ResponseWriter, r *http.Request) {
 
-// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+func Loggin(w http.ResponseWriter, r *http.Request) {
 
-// 	t := template.Must(template.ParseFiles("ui/pages/home.html"))
-// 	t.Execute(w, nil)
+	redirectTarget := "/"
 
-// 	if r.Method == "POST" {
+	if r.Method == "GET" {
 
-// 		var bodyData CommentInfo
-// 		body, err := ioutil.ReadAll(r.Body)
+		t := template.Must(template.ParseFiles("ui/pages/login.html"))
+		t.Execute(w, nil)
+	} else if r.Method == "POST" {
 
-// 		if err != nil {
-// 			w.WriteHeader(http.StatusInternalServerError)
-// 		} else {
-// 			w.WriteHeader(http.StatusCreated)
-// 		}
+		name := r.FormValue("name")
+		pass := r.FormValue("password")
+		if name == "a" && pass == "a" {
 
-// 		json.Unmarshal(body, &bodyData)
+			CreateToken(name, w)
+			redirectTarget = "/admin/comments"
+		}
+	}
 
-// 		fmt.Println(bodyData)
+	http.Redirect(w, r, redirectTarget, 302)
+}
 
-// 		err = PostInfo(bodyData)
-
-// 		if err != nil {
-// 			fmt.Println(err)
-// 			w.WriteHeader(http.StatusInternalServerError)
-// 		} else {
-// 			w.WriteHeader(http.StatusCreated)
-// 		}
-// 	}
-// }
 func GetAll(w http.ResponseWriter, r *http.Request) {
 
 	datas, err := GetAllInfo()
@@ -90,8 +84,8 @@ func GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == "GET" {
 		t := template.Must(template.ParseFiles("ui/pages/admin.html"))
-		t.Execute(w, datas)
-	
+		t.Execute(w, nil)
+
 	} else if r.Method == "VIEW" {
 
 		e := json.NewEncoder(w)
@@ -100,9 +94,34 @@ func GetAll(w http.ResponseWriter, r *http.Request) {
 		e.Encode(datas)
 
 	}
+}
+func GetById(w http.ResponseWriter, r *http.Request) {
+	redirectTarget := "/"
 
-	
+	v := mux.Vars(r)
+	index, err := strconv.Atoi(v["commentId"])
 
-	
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		panic(err)
+	}
+	if r.Method == "GET" {
+		t := template.Must(template.ParseFiles("ui/pages/admininfo.html"))
+		t.Execute(w, nil)
 
+	} else if r.Method == "VIEW" {
+
+		e := json.NewEncoder(w)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+
+		datas, err := GetAllInfo()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			panic(err)
+		}
+		fmt.Println(datas[index-1])
+		e.Encode(datas[index-1])
+	}
+	http.Redirect(w, r, redirectTarget, 302)
 }
